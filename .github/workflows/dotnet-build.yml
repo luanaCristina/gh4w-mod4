@@ -19,13 +19,14 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0
+        dotnet-version: 8.0.x
     
-    - name: Display dotnet version
-      run: dotnet --version
-     
     - name: Install dependencies
-      run: dotnet restore
+      run:  |
+          echo "Restoring dependencies..."
+          dotnet restore **/*.csproj
 
-    - name: Build
-      run: dotnet build --no-restore
+    - name: Build the project
+      run: |
+          echo "Compiling project..."
+          dotnet build **/*.csproj --no-restore
